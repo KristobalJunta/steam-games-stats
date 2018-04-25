@@ -32,16 +32,12 @@ for line in lines:
 
 game_json = json.loads(game_json)
 
-print(games)
-
 for g in games:
     game = find_game(g[1], game_json)
     if game is not None:
         hours = int(game['hours_forever'])
-        print(hours)
 
         date = datetime.now(timezone(timedelta(hours=2)))
-        print(date)
 
         cur.execute('insert into points(hours, game_id, timestamp) values(?,?,?);', (hours, g[0], date))
         conn.commit()
