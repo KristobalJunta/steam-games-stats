@@ -3,6 +3,7 @@ import sqlite3
 import re
 import json
 from datetime import datetime, timezone, timedelta
+import os
 
 
 def find_game(gid, game_json):
@@ -13,7 +14,8 @@ def find_game(gid, game_json):
     return None
 
 
-conn = sqlite3.connect('steamstats.db')
+curwd = os.path.dirname(os.path.realpath(__file__))
+conn = sqlite3.connect(curwd + '/steamstats.db')
 cur = conn.cursor()
 
 games = cur.execute('select * from games;').fetchall()
